@@ -1,0 +1,94 @@
+﻿@model IEnumerable<BookShop_WebApplication.Models.CART>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.BodyHomePage = 0;
+    ViewBag.Active = 5;
+    ViewBag.About_bg = 1;
+    ViewBag.abouttitle = "My Cart";
+}
+
+
+    <div class="container">
+        <div class="card border-dark">
+            <table class="table w-100">
+                <tr>
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.iBookID)
+                </th>*@
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>Edit</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<td>
+                        @Html.DisplayFor(modelItem => item.iBookID)
+                    </td>*@
+                        <td>
+                            <strong>@Html.DisplayFor(modelItem => item.sBookName)</strong>
+                        </td>
+                        <td>
+                            <img src="~/assets/product-img/@Html.DisplayFor(modelItem => item.sImage)" width="150px" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.dPrice)
+                        </td>
+                        <td>
+                            <a href="~/Cart/ReduceQuantity?idbook=@item.iBookID"><i class="fa-solid fa-minus"></i></a>
+                            <span class="badge badge-primary"> @Html.DisplayFor(modelItem => item.iQuantity)</span>
+                            <a href="~/Cart/IncreaseQuantity?idbook=@item.iBookID"><i class="fa-solid fa-plus"></i></a>
+                        </td>
+                        <td>
+                            <strong style="color: red">@Html.DisplayFor(modelItem => item.dTotal) VNĐ</strong>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger text-white" href="~/Cart/DeleteCart?idbook=@item.iBookID"><i class="fa-solid fa-xmark"></i></a>
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+            <table class="mr-4">
+                <tr>
+                    <td> <strong style="color: red; float: right">TOTAL: @ViewBag.TotalAmount VNĐ</strong></td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <p> <a class="btn btn-warning text-white float-left store-btn" href="~/Book/BookList"><i class="fa-solid fa-arrow-left"> Back</i></a></p>
+                     
+                        <p> <a class="btn btn-primary text-white float-right store-btn" style="margin-left: 10px;" href="~/Cart/Checkout"><i class="fa-solid fa-arrow-right"> Checkout</i></a></p>
+                       
+                        <p> <a class="btn btn-danger text-white float-right store-btn" href="~/Cart/DeleteAllCart"><i class="fa-solid fa-trash"></i> Remove</i></a></p>
+
+
+
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
+        
+        
+    </div>
+
+

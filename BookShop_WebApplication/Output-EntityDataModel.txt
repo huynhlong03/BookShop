@@ -1,0 +1,13 @@
+﻿Generated model file: Model_QLSach.edmx.
+Loading metadata from the database took 00:00:00.4381091.
+Generating the model took 00:00:00.7031935.
+Added the connection string to the Web.Config file.
+Writing the .edmx file took 00:00:00.0005769.
+Generated model file: Model_QLSach.edmx.
+Loading metadata from the database took 00:00:00.3060821.
+Generating the model took 00:00:00.6017703.
+Added the connection string to the Web.Config file.
+Writing the .edmx file took 00:00:00.0005392.
+Generated model file: Model_QLSach.edmx.
+Loading metadata from the database took 00:00:00.3920805.
+Generating the model took 00:00:00.5691052.

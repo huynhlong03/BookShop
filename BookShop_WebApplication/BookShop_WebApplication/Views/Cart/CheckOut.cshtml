@@ -1,0 +1,54 @@
+﻿@model BookShop_WebApplication.Models.ORDER
+
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.BodyHomePage = 0;
+    //ViewBag.Active = 2;
+    ViewBag.About_bg = 1;
+    ViewBag.abouttitle = "Check out";
+}
+
+<div class="container">
+    <h2 style="color:blue">Thanks for your order!</h2>
+    <div class="card border-dark">
+
+        <h3>Your OrderID <strong>@Model.OrderID</strong> be ordered at <strong> @string.Format("{0:dd-MM-yyyy}", Model.OrderDate)</strong></h3>
+        <table class="table w-100">
+
+            <tr>
+                <th>BookID</th>
+                <th>BookName</th>
+                <th>Image</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+            @foreach (var item in Model.ORDER_DETAIL)
+            {
+                var total = item.Quantity * item.Price;
+                <tr>
+                    <td>@item.BookID</td>
+                    <td><a href="~/Book/BookDetail?idBook=@item.BookID" style="color:blueviolet">@item.BOOK.BookName</a></td>
+                    <td><img src="~/assets/product-img/@item.BOOK.Image" width="150px" /></td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+                    <td style="color:red">@total</td>
+                </tr>
+
+            }
+        </table>
+        <table class="mr-4">
+            <tr>
+                <td> <strong style="color: red; float: right">TOTAL PAYMENT: @TempData["TotalCheckout"] VNĐ</strong></td>
+            </tr>
+            <tr>
+                <td>
+                    <p> <a class="btn btn-warning text-white float-left store-btn" href="~/Book/BookList"><i class="fa-solid fa-arrow-left"> Back Home</i></a></p>
+                   
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+    

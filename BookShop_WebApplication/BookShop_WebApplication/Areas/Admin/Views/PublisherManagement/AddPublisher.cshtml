@@ -1,0 +1,60 @@
+﻿@model BookShop_WebApplication.Models.PUBLISHER
+
+@{
+    ViewBag.Title = "AddPublisher";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+    ViewBag.Active = 10;
+}
+
+<h2>AddPublisher</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <section class="wrapper">
+        <div class="row" style="height: 600px">
+            <div class="col-lg-9 main-chart">
+                <div class="form-horizontal">
+                    <h4>PUBLISHER</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PublisherName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.PublisherName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PublisherName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PublisherAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.PublisherAddress, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PublisherAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PublisherPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.PublisherPhone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PublisherPhone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button class="btn btn-success">Create</button>
+                            <a class="btn btn-default" href="~/Admin/PublisherManagement/Index">Back to list</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <span style="color:red"><strong>@ViewBag.Create</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+

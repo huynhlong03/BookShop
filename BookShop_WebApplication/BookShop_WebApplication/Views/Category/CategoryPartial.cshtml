@@ -1,0 +1,13 @@
+﻿@model IEnumerable<BookShop_WebApplication.Models.CATEGORY>
+<a href="">Category</a>
+<ul class="dropdown">
+    @foreach (var item in Model)
+    {
+        <li class="dropdown-item">
+            <a href="@Url.Action("SearchBookByCategory", "Book", new { CateId = item.CategoryID})">@item.CategoryName</a>
+        </li>
+    }
+   
+
+</ul>
+

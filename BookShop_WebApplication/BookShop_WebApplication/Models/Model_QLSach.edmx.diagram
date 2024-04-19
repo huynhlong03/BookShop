@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c5a3aaece65479a8401cd30498fdc24" Name="Diagram1">
+        <EntityTypeShape EntityType="QUANLI_SACHModel.BOOK" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLI_SACHModel.CATEGORY" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLI_SACHModel.CLIENT" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLI_SACHModel.ORDER" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLI_SACHModel.ORDER_DETAIL" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLI_SACHModel.PUBLISHER" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLI_SACHModel.ROLE" Width="1.5" PointX="2.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLI_SACHModel.USER" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="QUANLI_SACHModel.FK__BOOK__PublisherI__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLI_SACHModel.FK__BOOK__PublisherI__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLI_SACHModel.FK__ORDER_DET__BookI__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLI_SACHModel.FK__ORDER__ClientID__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLI_SACHModel.FK__ORDER_DET__Order__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="QUANLI_SACHModel.FK__USER__RoleID__34C8D9D1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

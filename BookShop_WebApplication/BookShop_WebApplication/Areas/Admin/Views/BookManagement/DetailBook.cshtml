@@ -1,0 +1,86 @@
+﻿@model BookShop_WebApplication.Models.BOOK
+
+@{
+    ViewBag.Title = "DetailBook";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+    <section class="wrapper">
+        <div class="row" style="height: 600px">
+            <div class="col-lg-12 main-chart">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BookName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.BookName)
+                    </dd>
+                    <br />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+                    <br />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Decription)
+                    </dt>
+
+                    <dd>
+                        <p class="text-justify">@Html.DisplayFor(model => model.Decription)</p>
+                    </dd>
+                    <br />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UpdateDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UpdateDate)
+                    </dd>
+                    <br />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </dt>
+
+                    <dd>
+                        <img src="~/assets/product-img/@Html.DisplayFor(model => model.Image)" width="10%" />
+                    </dd>
+                    <br />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Quanlity)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Quanlity)
+                    </dd>
+                    <br />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CATEGORY.CategoryName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CATEGORY.CategoryName)
+                    </dd>
+                    <br />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PUBLISHER.PublisherName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PUBLISHER.PublisherName)
+                    </dd>
+                    <br />
+                </dl>
+                <p>
+                    <a class="btn btn-default" href="~/Admin/BookManagement/Index">Back</a>
+                    <a class="btn btn-primary" href="~/Admin/BookManagement/EditBook?bookId=@Model.BookID">Edit</a>
+
+                </p>
+            </div>
+            </div>
+        </section>
+
+           

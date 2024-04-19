@@ -1,0 +1,101 @@
+﻿@model BookShop_WebApplication.Models.ORDER
+
+@{
+    ViewBag.Title = "DetailOrder";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+}
+<section class="wrapper">
+    <div class="container">
+        <div class="row" style="padding-top:20px">
+            <div class="col-md-6">
+                <h3 style="color: dodgerblue">Order infomation</h3>
+                
+                 
+
+                    <p class="col-sm-8">
+                        <strong>OrderDate:</strong>@Html.DisplayFor(model => model.OrderDate)
+                    </p>
+
+                    
+                    <p class="col-sm-8">
+                        <strong>DeliveryDate: </strong> @Html.DisplayFor(model => model.DeliveryDate)
+                    </p>
+                 
+
+                    <p class="col-sm-8">
+                        <strong>Payment: </strong> @Html.DisplayFor(model => model.Payment)
+                    </p>
+
+                  
+                    <p class="col-sm-8">
+                        <strong>Status: </strong> @Html.DisplayFor(model => model.Status)
+                    </p>
+
+
+               
+                
+            </div>
+            <div class="col-md-6">
+                <h3 style="color: dodgerblue">Client infomation</h3>
+               
+                    
+                <p class="col-sm-8">
+                    <strong>ClientName: </strong> @Html.DisplayFor(model => model.CLIENT.ClientName)
+                </p>
+
+
+                    
+                <p class="col-sm-8">
+                    <strong>PhoneNumber: </strong> @Html.DisplayFor(model => model.CLIENT.PhoneNumber)
+                </p>
+
+                   
+                    <p class="col-sm-8">
+                        <strong>Email: </strong> @Html.DisplayFor(model => model.CLIENT.Email)
+                    </p>
+
+                   
+                    <p class="col-sm-8">
+                        <strong>Address: </strong> @Html.DisplayFor(model => model.CLIENT.Address)
+                    </p>
+               
+            </div>
+            <h3 style="color:red">PRODUCT</h3>
+            <table class="table table-bordered">
+                <tr>
+                    <th class="hidden">BookID</th>
+                    <th>BookName</th>
+                    <th>Image</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+                @foreach (var item in Model.ORDER_DETAIL)
+                {
+                    var total = item.Quantity * item.Price;
+                  
+            <tr>
+               
+                <td class="hidden">@item.BookID</td>
+                <td><a href="~/Book/BookDetail?idBook=@item.BookID" style="color:blueviolet">@item.BOOK.BookName</a></td>
+                <td><img src="~/assets/product-img/@item.BOOK.Image" width="150px" /></td>
+                <td>@item.Quantity</td>
+                <td>@string.Format("{0:#,0}", item.Price)</td>
+                <td style="color:red">@string.Format("{0:#,0}", total)</td>
+
+            </tr>
+                   
+                }
+            </table>
+            <div>
+                 <h4 style="color: red; float: right"> <strong>@string.Format("{0:#,0}", Model.ORDER_DETAIL.Sum(i => i.Price * i.Quantity)) VNĐ</strong> </h4>
+                
+            </div>
+            <div>
+                <a class="btn btn-default" href="~/Admin/OrderManagement/Index">Back to list</a>
+            </div>
+
+        </div>
+    </div>
+
+</section>

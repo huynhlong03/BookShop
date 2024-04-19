@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BookShop_WebApplication.Models.ROLE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+    ViewBag.Active = 1;
+}
+
+<section class="wrapper">
+    <div class="row" style="height: 600px">
+        <div class="col-lg-9 main-chart">
+            <p style="float:right"><a class="btn btn-success float-left" href="~/Admin/AdminRole/Create"><i class="fa-solid fa-plus"></i> Add role</a></p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoleName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoleName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="~/Admin/AdminRole/Detail?roleId=@item.RoleID">View</a>
+                            <a class="btn btn-primary" href="~/Admin/AdminRole/Edit?roleId=@item.RoleID">Edit</a>
+                            <a class="btn btn-danger" href="~/Admin/AdminRole/Delete?roleId=@item.RoleID">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+        </div>
+    </div>
+    </section>

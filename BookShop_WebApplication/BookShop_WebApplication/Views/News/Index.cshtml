@@ -1,0 +1,47 @@
+﻿
+@model BookShop_WebApplication.Models.NewsApiResponse
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.BodyHomePage = 0;
+    ViewBag.Active = 11;
+    ViewBag.About_bg = 1;
+    ViewBag.abouttitle = "News Headlines";
+    var i = 1;
+}
+
+
+@if (Model != null && Model.Articles != null && Model.Articles.Any())
+{
+    <div class="Books">
+        <div class="container">
+            <h1 style="color:blueviolet">Get news from NewsAPI</h1>
+            <table class="table table-bordered">
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+
+                </tr>
+                @foreach (var article in Model.Articles)
+                {
+
+                    <tr>
+                        <td>@i</td>
+                        <td><a style="color:blue">@article.Title</a></td>
+                        <td>@article.Description</td>
+                    </tr>
+                    i++;
+
+                }
+
+            </table>
+
+        </div>
+    </div>
+}
+else
+{
+    <p>No news available.</p>
+}

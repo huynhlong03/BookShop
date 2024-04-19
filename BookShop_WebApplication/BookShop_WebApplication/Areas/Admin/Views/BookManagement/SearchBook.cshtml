@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BookShop_WebApplication.Models.BOOK>
+
+@{
+    ViewBag.Title = "SearchBook";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<section class="wrapper">
+    <div class="row" style="height: 600px">
+        <div class="col-lg-12 main-chart">
+            <p style="color:red">@ViewBag.Notice</p>
+            @if (Model != null && Model.Any())
+            {
+                var i = 1;
+                <table class="table">
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Price
+                        </th>
+
+                        <th>
+                            Update Date
+                        </th>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Quanlity
+                        </th>
+
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@i</td>
+                            <td>
+                                <p style="color:blueviolet"> @Html.DisplayFor(modelItem => item.BookName)</p>
+                            </td>
+                            <td>
+                                <p style="color:red"> @string.Format("{0:#,0}", item.Price)</p>
+                            </td>
+
+                            <td>
+                                @string.Format("{0:dd-MM-yyyy}", item.UpdateDate)
+                            </td>
+                            <td>
+                                <img src="~/assets/product-img/@Html.DisplayFor(modelItem => item.Image)" width="80px" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quanlity)
+                            </td>
+
+                            <td>
+                                <a class="btn btn-info" href="~/Admin/BookManagement/DetailBook?bookId=@item.BookID">View</a>
+                                <a class="btn btn-primary" href="~/Admin/BookManagement/EditBook?bookId=@item.BookID">Edit</a>
+                                <a class="btn btn-danger" href="~/Admin/BookManagement/DeleteBook?bookId=@item.BookID">Delete</a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+
+                </table>
+            }
+            
+        </div>
+    </div>
+</section>
+

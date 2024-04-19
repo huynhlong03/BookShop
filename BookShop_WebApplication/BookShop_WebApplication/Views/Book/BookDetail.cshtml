@@ -1,0 +1,131 @@
+﻿@model BookShop_WebApplication.Models.BOOK
+
+@{
+    ViewBag.Title = "BookDetail";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.BodyHomePage = 0;
+    ViewBag.About_bg = 1;
+    ViewBag.abouttitle = "Detail Book";
+}
+
+
+<div class="Books">
+    <div class="container">
+        <table class="table">
+            <div class="row" style="padding-top: 20px">
+                <div class="col-4">
+                    <img src="~/assets/product-img/@Model.Image" class="w-100" />
+
+
+                </div>
+                <div class="col-8">
+                    <div>
+                        <h2> <strong>@Model.BookName</strong></h2>
+                        <dl class="row">
+                            <dt class="col-sm-3">
+                                <strong>Quantity:</strong>
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Model.Quanlity
+                            </dd>
+                            <dt class="col-sm-3">
+                                <strong>Category:</strong>
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Model.CATEGORY.CategoryName
+                            </dd>
+                            <dt class="col-sm-3">
+                                <strong>Publisher:</strong>
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Model.PUBLISHER.PublisherName
+                            </dd>
+
+                            <dt class="col-sm-3">
+                                <strong>Price:</strong>
+                            </dt>
+                            <dd class="col-sm-8">
+                                <strong style="color: red">@Model.Price VNĐ</strong>
+                            </dd>
+                        </dl>
+                        @using (Html.BeginForm("AddToCartFromList", "Cart", new { idBook = Model.BookID }, FormMethod.Post))
+                        {
+                            <div>
+                                <div class="quantity-container float-left">
+                                    <button class="quantity-btn dec" style="width: 37px; height:37px;" onclick="decrement(event)">-</button>
+                                    <input type="number" class="quantity-input text-center" style="width: 60px; height:37px;" id="quantity" value="1" min="1" name="Quantity">
+                                    <button class="quantity-btn inc" style="width: 37px; height:37px;" onclick="increment(event)">+</button>
+                                </div>
+
+                                <div style="float:left; display:flex; padding-left: 50px">
+                                    <a class="btn btn-warning text-white float-right store-btn" href="@Url.Action("BookList", "Book")"><i class="fa-solid fa-arrow-left"> Back</i></a>
+
+                                    <!-- Sử dụng nút submit thay vì thẻ a để gửi form -->
+
+                                    @if (Model.Quanlity <= 0)
+                                    {
+                                        <button class="btn btn-secondary text-white float-right  disabled" disabled style="margin-left: 10px;">
+                                            <i class="fa-solid fa-pen-to-square"></i> Sold out
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary text-white float-right store-btn" style="margin-left: 10px;">
+                                            <i class="fa-solid fa-pen-to-square"></i> Add to cart
+                                        </button>
+                                    }
+                                </div>
+                                
+                            </div>
+                        }
+                    </div>
+                    <br />
+                </div>
+                @*<p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.BookID }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>*@
+            </div>
+            <hr />
+            <div class="col-12">
+                <dl class="row">
+
+                    @*<p style="text-align: left; padding: 0px 0px;"><strong>Name:</strong> @Model.BookName</p>*@
+
+                    <dt class="">
+                        <strong>Decription:</strong>
+                    </dt>
+                    <dd class="text-justify">
+                        @Model.Decription
+                    </dd>
+
+
+                </dl>
+            </div>
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+    function increment(event) {
+        event.preventDefault();
+        var quantityInput = document.getElementById('quantity');
+        var maxQuantity = @Model.Quanlity; // Lấy giá trị maxQuantity từ thuộc tính max
+
+        if (quantityInput.value < maxQuantity) {
+            quantityInput.stepUp();
+        }
+    }
+
+    function decrement() {
+        event.preventDefault();
+        var quantityInput = document.getElementById('quantity');
+        quantityInput.stepDown();
+    }
+
+    
+
+</script>
+

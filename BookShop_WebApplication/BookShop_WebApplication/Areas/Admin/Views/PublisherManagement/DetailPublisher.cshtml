@@ -1,0 +1,46 @@
+﻿@model BookShop_WebApplication.Models.PUBLISHER
+
+@{
+    ViewBag.Title = "DetailPublisher";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+
+    <section class="wrapper">
+        <div class="row" style="height: 600px">
+            <div class="col-lg-9 main-chart">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PublisherName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PublisherName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PublisherAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PublisherAddress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PublisherPhone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PublisherPhone)
+                    </dd>
+
+                </dl>
+                <p>
+                    <a class="btn btn-default" href="~/Admin/PublisherManagement/Index">Back</a>
+                    <a class="btn btn-primary" href="~/Admin/PublisherManagement/EditPublisher?publisherId=@Model.PublisherID">Edit</a>
+
+                </p>
+            </div>
+          </div>
+        </section>
+

@@ -1,0 +1,92 @@
+﻿<div id="sidebar" class="nav-collapse ">
+    <!-- sidebar menu start-->
+    <ul class="sidebar-menu" id="nav-accordion">
+        @{
+            var user = BookShop_WebApplication.App_Start.SessionConfig.GetUser();
+        }
+        <p class="centered"><a href="profile.html"><img src="~/assetsAdmin/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+        @if (user != null)
+        {
+            <h5 class="centered">@user.UserName</h5>
+        }
+
+        <li class="mt">
+            <a class="@Html.Raw(ViewBag.Active == 0 ? "active":"")" href="~/Admin/HomeAdmin/Index">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="sub-menu">
+            <a class="@Html.Raw(((ViewBag.Active == 3)||((ViewBag.Active == 4))) ? "active":"")" href="javascript:;">
+                <i class="fa-solid fa-book"></i>
+                <span>Books Managerment</span>
+            </a>
+            <ul class="sub">
+                <li class="@Html.Raw(ViewBag.Active == 3 ? "active":"")"><a href="~/Admin/BookManagement/Index">Book list</a></li>
+                <li class="@Html.Raw(ViewBag.Active == 4 ? "active":"")"><a href="~/Admin/BookManagement/AddBook">Add new book</a></li>
+
+            </ul>
+        </li>
+
+        <li class="sub-menu">
+            <a class="@Html.Raw(ViewBag.Active == 5 ? "active":"")" href="javascript:;">
+                <i class="fa-solid fa-file-invoice"></i>
+                <span>Order Management</span>
+            </a>
+            <ul class="sub">
+                <li class="@Html.Raw(ViewBag.Active == 5 ? "active":"")"><a href="~/Admin/OrderManagement/Index">Order</a></li>
+
+            </ul>
+        </li>
+
+        <li class="sub-menu">
+            <a class="@Html.Raw(ViewBag.Active == 6 ? "active":"")" href="~/Admin/CLientManagement/Index">
+                <i class="fa-solid fa-users"></i>
+                <span>Client Management</span>
+            </a>
+            @*<ul class="sub">
+                <li class="@Html.Raw(ViewBag.Active == 6 ? "active":"")"><a href="calendar.html">Client</a></li>
+
+            </ul>*@
+        </li>
+        <li class="sub-menu">
+            <a class="@Html.Raw(((ViewBag.Active == 7)||((ViewBag.Active == 8))) ? "active":"")" href="javascript:;">
+                <i class="fa fa-th"></i>
+                <span>Category Management</span>
+            </a>
+            <ul class="sub">
+                <li class="@Html.Raw(ViewBag.Active == 7 ? "active":"")"><a href="~/Admin/CategoryManagement/Index">List category</a></li>
+                <li class="@Html.Raw(ViewBag.Active == 8 ? "active":"")"><a href="~/Admin/CategoryManagement/AddCategory">Add category</a></li>
+            </ul>
+        </li>
+
+        <li class="sub-menu">
+            <a class="@Html.Raw(((ViewBag.Active == 9)||((ViewBag.Active == 10))) ? "active":"")" href="javascript:;">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Publisher Management</span>
+            </a>
+            <ul class="sub">
+                <li class="@Html.Raw(ViewBag.Active == 9 ? "active":"")"><a href="~/Admin/PublisherManagement/Index">List publisher</a></li>
+                <li class="@Html.Raw(ViewBag.Active == 10 ? "active":"")"><a href="~/Admin/PublisherManagement/AddPublisher">Add publisher</a></li>
+            </ul>
+        </li>
+
+        <li class="sub-menu">
+            <a class="@Html.Raw(((ViewBag.Active == 1)||((ViewBag.Active == 2))||((ViewBag.Active == 11))||((ViewBag.Active == 12))) ? "active":"")" href="javascript:;">
+                <i class="fa fa-tasks"></i>
+                <span>System Managenment</span>
+            </a>
+            <ul class="sub">
+                <li class="@Html.Raw(ViewBag.Active == 11 ? "active":"")"><a href="~/Admin/Account/Index">Account</a></li>
+                <li class="@Html.Raw(ViewBag.Active == 12 ? "active":"")"><a href="~/Admin/Account/Create">Add account</a></li>
+                <li class="@Html.Raw(ViewBag.Active == 1 ? "active":"")"><a href="~/Admin/AdminRole/Index">Role</a></li>
+                <li class="@Html.Raw(ViewBag.Active == 2 ? "active":"")"><a href="~/Admin/AdminRole/Create">Create role</a></li>
+            </ul>
+        </li>
+
+
+
+    </ul>
+    <!-- sidebar menu end-->
+</div>

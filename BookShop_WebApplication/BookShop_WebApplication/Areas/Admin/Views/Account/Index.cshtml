@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BookShop_WebApplication.Models.USER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+    ViewBag.Active = 11;
+    var stt = 1;
+}
+
+<section class="wrapper">
+    <div class="row" style="height: 600px">
+        <div class="col-lg-9 main-chart">
+            <p style="float:right"><a class="btn btn-success float-left" href="~/Admin/Account/Create"><i class="fa-solid fa-plus"></i> Add account</a></p>
+            <table class="table">
+                <tr>
+                    <th>#</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fullname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ROLE.RoleName)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@stt</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fullname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ROLE.RoleName)
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="~/Admin/Account/Detail?accountId=@item.UserID">View</a>
+                            <a class="btn btn-primary" href="~/Admin/Account/Edit?accountId=@item.UserID">Edit</a>
+                            <a class="btn btn-danger" href="~/Admin/Account/Delete?accountId=@item.UserID">Delete</a>
+                        </td>
+                    </tr>
+                    stt++;
+                }
+
+            </table>
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+        </div>
+
+</div>
+</section>

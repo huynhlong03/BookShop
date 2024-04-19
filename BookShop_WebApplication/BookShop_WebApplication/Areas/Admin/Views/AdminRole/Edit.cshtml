@@ -1,0 +1,52 @@
+﻿@model BookShop_WebApplication.Models.ROLE
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <section class="wrapper">
+        <div class="row" style="height: 600px">
+            <div class="col-lg-9 main-chart">
+                <div class="form-horizontal">
+                    <h4>ROLE</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.RoleID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button class="btn btn-success">Save</button>
+                            <a class="btn btn-default" href="~/Admin/AdminRole/Index">Back</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <span style="color:red"><strong>@ViewBag.Edit</strong></span>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+                }
+
+

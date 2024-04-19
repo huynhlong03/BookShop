@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BookShop_WebApplication.Models.BOOK>
+
+@{
+    ViewBag.Title = "SearchBookByCategory";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.BodyHomePage = 0;
+    ViewBag.Active = 8;
+    ViewBag.About_bg = 1;
+    ViewBag.abouttitle = "Category";
+}
+
+<div class="Books">
+    <div class="container">
+        <table class="table">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="titlepage" style="margin-top: 90px;">
+                        <span>
+                            FIND YOUR PLACE AT B&N'S ONLINE BOOKSTORE
+                            Over 5 million books ready to ship, 3.6 million eBooks and 300,000 audiobooks to download right now! Curbside pickup available in most stores!
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row box">
+                @foreach (var item in Model)
+                {
+
+
+                    <div class="col-3">
+                        <div class="card my-2 card-stored">
+                            <a class="a-cleanup" href="~/Book/BookDetail?idBook=@item.BookID">
+                                <img src="~/assets/product-img/@item.Image" class="card-img-top card-img-custom" />
+                                <div class="card-body text-left" style="height:6em;">
+
+                                    @{
+                                        if (@item.BookName.Length > 40)
+                                        {
+                                            <h5 style="color:rebeccapurple">@item.BookName.Substring(0, 40)...</h5>
+
+                                        }
+                                        else
+                                        {
+                                            <h5 style="color:rebeccapurple">@item.BookName</h5>
+
+                                        }
+                                    }
+                                    @*@Html.ActionLink("Detail", "BookDetail", new { idBook = item.BookID }, new { @style = "float: right; color:blue; text-decoration:underline;" })*@
+
+                                </div>
+
+                                <div class="card-body">
+                                    <span class="card-text float-left" style="color: red"><strong>@item.Price VNĐ</strong></span>
+                                    <a class="btn btn-primary float-right text-white store-btn" href="~/Cart/AddToCartFromList?idbook=@item.BookID&quantity=1"><i class="fa-solid fa-cart-plus"></i></a>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                }
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="read-more">
+                            <a href="#">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </table>
+    </div>
+</div>
+
+

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "EmptyHistory";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.BodyHomePage = 0;
+   
+    ViewBag.About_bg = 1;
+    ViewBag.abouttitle = "History order";
+}
+
+<div class="container">
+<div class="card">
+    <table class="table w-100" style="height: 400px">
+        <h2>You have no items.</h2>
+
+    </table>
+    <div style="padding:10px">
+       
+        <p> <a class="btn btn-warning text-white float-left store-btn" href="@Url.Action("BookList", "Book")"><i class="fa-solid fa-arrow-left"> Back</i></a></p>
+    </div>
+
+</div>
+
+
+
+</div>
+

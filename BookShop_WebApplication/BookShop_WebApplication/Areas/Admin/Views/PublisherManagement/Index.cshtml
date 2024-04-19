@@ -1,0 +1,74 @@
+﻿@*@model IEnumerable<BookShop_WebApplication.Models.PUBLISHER>*@
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<BookShop_WebApplication.Models.PUBLISHER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+    ViewBag.Active = 9;
+}
+
+<section class="wrapper">
+    <div class="row" style="height: 600px">
+        <div class="col-lg-12 main-chart">
+            <p style="float:right"><a class="btn btn-success float-left" href="~/Admin/PublisherManagement/AddPublisher"><i class="fa-solid fa-plus"></i> Add publisher</a></p>
+            @if (Model != null && Model.Any())
+            {
+                var i = 1;
+                <table class="table">
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            Phone
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PublisherName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PublisherAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PublisherPhone)
+                            </td>
+                            <td>
+                                <a class="btn btn-info" href="~/Admin/PublisherManagement/DetailPublisher?publisherId=@item.PublisherID">View</a>
+                                <a class="btn btn-primary" href="~/Admin/PublisherManagement/EditPublisher?publisherId=@item.PublisherID">Edit</a>
+                                <a class="btn btn-danger" href="~/Admin/PublisherManagement/DeletePublisher?publisherId=@item.PublisherID">Delete</a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+
+                </table>
+            }
+            <div>
+
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @TempData["ErrorMessage"]
+                    </div>
+                }
+
+
+            </div>
+            <div class="pagination">
+                @Html.PagedListPager(Model, page => Url.Action("Index", "PublisherManagement", new { page, pagesize = @ViewBag.PageSize }))
+            </div>
+        </div>
+    </div>
+</section>

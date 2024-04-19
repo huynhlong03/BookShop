@@ -1,0 +1,92 @@
+﻿
+@model IEnumerable<BookShop_WebApplication.Models.BOOK>
+@{
+    ViewBag.Title = "SearchBook";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.BodyHomePage = 0;
+    ViewBag.Active = 10;
+    ViewBag.About_bg = 1;
+    ViewBag.abouttitle = "Search Books";
+}
+
+<div class="Books">
+    <div class="container">
+        <table class="table">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="titlepage" style="margin-top: 90px;">
+                        <span>
+                            FIND YOUR PLACE AT B&N'S ONLINE BOOKSTORE
+                            Over 5 million books ready to ship, 3.6 million eBooks and 300,000 audiobooks to download right now! Curbside pickup available in most stores!
+                        </span>
+                    </div>
+                    <div style="padding-bottom: 30px">
+
+                        <div class="form-inline">
+                            @using (@Html.BeginForm("SearchBook", "Book", FormMethod.Post))
+                            {
+                                <input class="form-control mr-sm-2 border-dark" type="text" placeholder="Search" aria-label="Search" name="searchInput">
+                                <button class="btn btn-primary my-2 my-sm-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+                <p style="color:red">@ViewBag.Notice</p>
+            </div>
+            @if (Model != null && Model.Any())
+            {
+                var i = 1;
+                <div class="row box">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-3">
+                            <div class="card my-2 card-stored">
+                                <a class="a-cleanup" href="~/Book/BookDetail?idBook=@item.BookID">
+                                    <img src="~/assets/product-img/@item.Image" class="card-img-top card-img-custom" />
+                                    <div class="card-body text-left" style="height:6em;">
+
+                                        @{
+                                            if (@item.BookName.Length > 40)
+                                            {
+                                                <h5 style="color:rebeccapurple">@item.BookName.Substring(0, 40)...</h5>
+
+                                            }
+                                            else
+                                            {
+                                                <h5 style="color:rebeccapurple">@item.BookName</h5>
+
+                                            }
+                                        }
+                                        @*@Html.ActionLink("Detail", "BookDetail", new { idBook = item.BookID }, new { @style = "float: right; color:blue; text-decoration:underline;" })*@
+
+                                    </div>
+
+                                    <div class="card-body">
+                                        <span class="card-text float-left" style="color: red"><strong>@string.Format("{0:#,0}", item.Price) VNĐ</strong></span>
+                                        @if (item.Quanlity <= 0)
+                                        {
+                                            <a class="disabled-link" class="btn btn-secondary float-right text-white store-btn">Sold out</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-primary float-right text-white store-btn" href="~/Cart/AddToCartFromList?idbook=@item.BookID&quantity=1"><i class="fa-solid fa-cart-plus"></i></a>
+                                        }
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        i++;
+
+
+                    }
+                </div>
+            }
+
+
+        </table>
+
+    </div>
+</div>
+

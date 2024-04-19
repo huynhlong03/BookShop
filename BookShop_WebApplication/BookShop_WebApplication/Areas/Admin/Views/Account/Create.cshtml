@@ -1,0 +1,109 @@
+﻿@model BookShop_WebApplication.Models.USER
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+    ViewBag.Active = 12;
+    BookShop_WebApplication.Models.QL_SACHEntities db = new BookShop_WebApplication.Models.QL_SACHEntities();
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<section class="wrapper">
+    <div class="row" style="height: 600px">
+        <div class="col-lg-9 main-chart">
+            <div class="form-horizontal">
+                <h4>USER</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Fullname, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RoleID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select class="form-control" name="RoleID">
+                            @foreach (var item in db.ROLES.ToList())
+                            {
+                                <option value="@item.RoleID">@item.RoleName</option>
+                            }
+
+                        </select>
+                        @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button class="btn btn-success">Create</button>
+                        <a class="btn btn-default" id="btnCreateAccount" href="#">Back to list</a>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <span style="color:red"><strong>@ViewBag.Create</strong></span>
+                </div>
+            </div>
+            
+
+           </div>
+        </div>
+    </section>
+}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+   $(document).ready(function () {
+    console.log("Document ready");
+    $('#btnCreateAccount').click(function (e) {
+        e.preventDefault();
+        console.log("Button clicked");
+
+        // Make an Ajax request to navigate back to the list of accounts
+        $.ajax({
+            url: '@Url.Action("Index", "Account")',
+            type: 'GET',
+            success: function (data) {
+                console.log("Ajax request success");
+                $('body').html(data);
+            },
+            error: function (xhr, status, error) {
+                console.error("Ajax request error:", error);
+                alert('Error navigating back to the list of accounts.');
+            }
+        });
+    });
+});
+</script>

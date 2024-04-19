@@ -1,0 +1,100 @@
+﻿@model IEnumerable<BookShop_WebApplication.Models.ORDER>
+
+@{
+    ViewBag.Title = "History Order";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.BodyHomePage = 0;
+    //ViewBag.Active = 2;
+    ViewBag.About_bg = 1;
+    ViewBag.abouttitle = "History Order";
+}
+
+<div class="container">
+  
+        @foreach (var order in Model)
+        {
+            decimal s = 0;
+    <div class="card border-dark mb-5 mt-5 col-12">
+        @*<table class="table w-100">*@
+
+
+        <h3>Your OrderID <strong>@order.OrderID</strong> be ordered at <strong>@order.OrderDate</strong></h3>
+        <h3>Status: <strong style="color:red">@order.Status</strong></h3>
+        <hr />
+        @foreach (var item in order.ORDER_DETAIL)
+        {
+
+
+            var total = item.Quantity * item.Price;
+            s += (decimal)total;
+            <dl class="row">
+
+                <dd class="col-sm-auto text-hide">
+                    @item.BookID
+                </dd>
+
+                <dd class="col-sm-2">
+                    <img src="~/assets/product-img/@item.BOOK.Image" width="70%" />
+                </dd>
+
+                <dd class="col-sm-6">
+                    <h3><a href="~/Book/BookDetail?idBook=@item.BookID" style="color:blueviolet">@item.BOOK.BookName</a> x @item.Quantity</h3>
+                </dd>
+                <dd class="col-sm-1">
+                    <p style="color:red"> @item.Price</p>
+                </dd>
+                <dd class="col-sm-2"><p> <a class="bg-info text-white" href="~/Cart/AddToCartFromList?idbook=@item.BookID&quantity=1">Buy Again</a></p></dd>
+            </dl>
+
+            @*<tr>
+                <td>@item.BookID</td>
+                <td><img src="~/assets/product-img/@item.BOOK.Image" width="100px"/></td>
+                <td style="padding-left:20px"><a href="~/Book/BookDetail?idBook=@item.BookID" style="color:blueviolet">@item.BOOK.BookName</a> x @item.Quantity</td>
+
+                <td>@item.Price</td>
+
+
+            </tr>*@
+
+
+        }
+
+
+        @*</table>*@
+        <table class="mr-4">
+            <tr>
+                <td> <strong style="color: red; float: right">TOTAL PAYMENT: @s VNĐ</strong></td>
+               
+            </tr>
+            <tr>
+                <td>
+                    @if (order.Status == "Đang giao")
+                    {
+                        <form class="float-right" method="post" action="@Url.Action("UpdateDeliveryStatus", "Cart")">
+                            @Html.Hidden("orderId", order.OrderID)
+                            <input class="btn btn-success" type="submit" value="Đã nhận" />
+
+                        </form>
+                    }
+                    else if (order.Status == "Giao thành công")
+                    {
+                        <a class="btn btn-primary float-right" href="">Rate</a>
+                        <a class="btn btn-warning float-right text-white" style="margin-right: 10px" href="">Contact to shop</a>
+
+                    }
+                    else if (order.Status == "Chờ xác nhận")
+                    {
+                <form class="float-right" method="post" action="@Url.Action("CancelOrder", "Cart")">
+                    @Html.Hidden("orderId", order.OrderID)
+                    <input class="btn btn-danger" type="submit" value="Hủy đơn" />
+
+                </form>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+        }
+
+</div>
+

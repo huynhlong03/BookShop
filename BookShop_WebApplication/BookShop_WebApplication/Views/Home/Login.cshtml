@@ -1,0 +1,53 @@
+﻿@model BookShop_WebApplication.Models.CLIENT
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.BodyHomePage = 0;
+    ViewBag.Active = 6;
+    ViewBag.About_bg = 1;
+    ViewBag.abouttitle = "Login";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container mt-3 p-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row md-3 p-1">
+                                <label class="control-label col-md-3"><h2>User Name</h2></label>
+                                <div class="col-md-8">
+                                    <input class="form-control border-dark" type="text" name="Username" />
+                                </div>
+                            </div>
+
+                            <div class="row md-3 p-1">
+                                <label class="control-label col-md-3"><h2>Password</h2></label>
+                                <div class="col-md-8">
+                                    <input class="form-control border-dark" type="password" name="Password" />
+                                </div>
+                            </div>
+                            <p>@ViewBag.thongbao</p>
+
+                            <div class="row d-grid p-1">
+                                <div class="col-md-offset-12 col-md-12 pt-2 pl-3 text-center">
+                                    <button class="btn btn-success">Login</button>
+                                    <a class="btn btn-secondary text-white" href="~/Home/Index">Back Home</a>
+                                </div>
+                            </div>
+
+                            <div class="row md-6 p-3">
+                                <span style="color:red"><strong>@ViewBag.Login</strong></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

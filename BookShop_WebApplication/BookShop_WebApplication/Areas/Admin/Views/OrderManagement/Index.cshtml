@@ -1,0 +1,111 @@
+﻿@*@model IEnumerable<BookShop_WebApplication.Models.ORDER>*@
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<BookShop_WebApplication.Models.ORDER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage.cshtml";
+    ViewBag.Active = 5;
+}
+
+<section class="wrapper">
+<div class="row" style="height: 600px">
+    <div class="col-lg-12 main-chart">
+
+        @if (Model != null && Model.Any())
+        {
+            var i = 1;
+            <table class="table table-bordered">
+                <tr>
+
+                    <th>
+                        #
+                    </th>
+                    <th>ID</th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        Delevery Date
+                    </th>
+                    <th>
+                        Payment
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Client
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td> @Html.DisplayFor(modelItem => item.OrderID)</td>
+                        <td>
+                            @string.Format("{0:dd-MM-yyyy}", item.OrderDate)
+                        </td>
+                        <td>
+                            @string.Format("{0:dd-MM-yyyy}", item.DeliveryDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Payment)
+                        </td>
+                        <td>
+                            @if (item.Status == "Đang giao")
+                            {
+                                <strong style="color:dodgerblue"> @Html.DisplayFor(modelItem => item.Status)</strong>
+                            }
+                            else if (item.Status == "Đã hủy đơn hàng")
+                            {
+                                <strong style="color:red"> @Html.DisplayFor(modelItem => item.Status)</strong>
+                            }
+                            else if (item.Status == "Giao thành công")
+                            {
+                                <strong style="color:limegreen"> @Html.DisplayFor(modelItem => item.Status)</strong>
+                            }
+                            else if (item.Status == "Chờ xác nhận")
+                            {
+                                <strong> @Html.DisplayFor(modelItem => item.Status)</strong>
+                            }
+                            else if (item.Status == "Chờ hủy đơn")
+                            {
+                                <strong style="color:goldenrod"> @Html.DisplayFor(modelItem => item.Status)</strong>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CLIENT.ClientName)
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="~/Admin/OrderManagement/DetailOrder?OrderId=@item.OrderID">View</a>
+                            @if (item.Status == "Chờ xác nhận")
+                            {
+                                <form method="post" action="@Url.Action("UpdateDeliveryStatus", "OrderManagement")" style="float:right">
+                                    @Html.Hidden("orderId", item.OrderID)
+                                    <input class="btn btn-success" type="submit" value="Giao hàng" />
+                                </form>
+                            }
+                            else if (item.Status == "Chờ hủy đơn")
+                            {
+                                <form method="post" action="@Url.Action("CancelOrder", "OrderManagement")" style="float:right">
+                                    @Html.Hidden("orderId", item.OrderID)
+                                    <input class="btn btn-danger" type="submit" value="Hủy đơn" />
+                                </form>
+                            }
+                        </td>
+
+                    </tr>
+                    i++;
+                }
+
+            </table>
+        }
+        <div class="pagination">
+            @Html.PagedListPager(Model, page => Url.Action("Index", "OrderManagement", new { page, pagesize = @ViewBag.PageSize }))
+        </div>
+    </div>
+</div>
+</section>
